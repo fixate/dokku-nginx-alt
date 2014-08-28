@@ -59,7 +59,11 @@ if [[ -e "$SSL_PATH/server.crt" ]] && [[ -e "$SSL_PATH/server.key" ]]; then
 
   # Setup SSL vitual host
   cat $NGINX_CONF | process_template >> $APP_PATH/nginx.conf
-  VHOST=$(< "$VHOST_PATH")
+  if [[ -f "$APP_PATH/VHOST" ]]; then
+    VHOST=$(< "$APP_PATH/VHOST")
+  else
+    VHOST=localhost
+  fi
   echo "https://$VHOST:$PORT" > "$DOKKU_ROOT/$APP/URL"
 fi
 
