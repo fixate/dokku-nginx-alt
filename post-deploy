@@ -6,7 +6,7 @@ set -a #export all subsequently defined variables for template access
 # NOTE: Template variables must be exported (done with set -a above) and placed
 # in brackets (like ${...}) for the regex to process it.
 shopt -s expand_aliases
-alias process_template="perl -p -e 's/\\$\{([^}]+)\}/defined \$ENV{\$1} ? \$ENV{\$1} : \$&/eg'"
+alias process_template="perl -p -e 's/\$\{([^}]+)\}/defined \$ENV{\$1} ? \$ENV{\$1} : \$&/eg'"
 
 echo "-----> Deploying nginx..."
 APP="$1"; PORT="$2"
