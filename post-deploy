@@ -58,9 +58,8 @@ if [[ -e "$SSL_PATH/server.crt" ]] && [[ -e "$SSL_PATH/server.key" ]]; then
   fi
 
   # Setup SSL vitual host
-  SERVER_NAME=$(< "$VHOST_PATH")
   cat $NGINX_CONF | process_template >> $APP_PATH/nginx.conf
-  echo "https://$SERVER_NAME" > "$DOKKU_ROOT/$APP/URL"
+  echo "https://$APP:$PORT" > "$DOKKU_ROOT/$APP/URL"
 fi
 
 # Now handle non-SSL domains
